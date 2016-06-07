@@ -1,0 +1,4 @@
+	real*8 currentcor,beamposcor,denscor,dummyposcor
+	common/cryocor/currentcor,beamposcor,denscor,dummyposcor
+
+

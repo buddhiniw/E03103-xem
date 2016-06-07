@@ -1,0 +1,12 @@
+C Common block for kinematics, target thickness, etc.
+C Handy so I can use this stuff in MC AND data.
+
+       real*8 ebeam,ebeam_cor,pcent,pcent_replay,th_deg,th_rad,thradcent
+       real*8 thdegcent,xbjmin,xbjmax,ximin,ximax
+       real*8 targ_Z, targ_A, targ_Matom, targ_thick, luminosity,eloss
+       real*8 targ_dens,ytar
+
+	common /kine/ebeam,ebeam_cor,pcent,pcent_replay,th_deg,th_rad,
+     >               thdegcent,thradcent,xbjmin,xbjmax,ximin,ximax,
+     >               targ_z, targ_A, targ_Matom, targ_thick, luminosity,eloss,
+     >               targ_dens,ytar

@@ -1,0 +1,2 @@
+	real*8 xcer(110),cereff(110)
+	common/hcere/xcer,cereff

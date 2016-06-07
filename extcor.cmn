@@ -1,0 +1,6 @@
+	real*8 epext(300),thext(69),extcan(69,300),extdummy(69,300),extrat(69,300)
+	logical doing_ext
+	integer npmax !number of p-bins
+	common/extcor/epext,thext,extrat,
+     >               doing_ext,npmax
+

@@ -1,0 +1,16 @@
+#Project folders
+OUT/
+RAD/
+OUT_old/
+simout/
+simtuples/
+ntuples/
+scalers/
+RUNS/
+unused/
+hbook/
+
+#Compiler outputs
+*.o
+*~
+*#

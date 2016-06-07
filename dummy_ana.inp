@@ -1,0 +1,7 @@
+18deg_5100_dummy_us.dat				!data run list
+						!dummy runlist
+			!positron run list
+						!dummy positrons
+18deg_al_us_5100				!simc file
+5.766_18.0_27_dummy_up.out			!radiative corrections file
+

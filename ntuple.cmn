@@ -1,0 +1,29 @@
+      integer MAX_Ntuple_size
+      parameter (MAX_Ntuple_size= 100)
+      integer default_Ntuple_ID
+      parameter (default_Ntuple_ID= 9010)
+      integer sim_Ntuple_ID
+      parameter (sim_Ntuple_ID=1)
+*
+*     CTPTYPE=parm
+*
+
+      logical Ntuple_exists
+      integer Ntuple_ID
+      integer Ntuple_size
+      integer Ntuple_IOchannel
+      character*80 Ntuple_name
+      character*80 Ntuple_title
+      character*132 Ntuple_directory
+      character*256 Ntuple_file
+      character*8 Ntuple_tag(MAX_Ntuple_size)
+*
+*     CTPTYPE=event
+*
+      real*4 Ntuple_contents(MAX_Ntuple_size)
+*
+      COMMON /Ntuple/ Ntuple_exists,Ntuple_ID,
+     >                     Ntuple_size,Ntuple_IOchannel,
+     >                      Ntuple_name,Ntuple_title,
+     >                       Ntuple_directory,Ntuple_file,
+     >                        Ntuple_tag,Ntuple_contents

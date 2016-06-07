@@ -1,0 +1,18 @@
+	integer ndeltabins,nxbins,nxibins,neprimebins,nvar,nthetabins
+	real*8 eprimemin,eprimemax
+
+	parameter(nvar=15)
+	parameter (nxbins=16)
+	parameter (nxibins=16)
+	parameter (ndeltabins=18)
+	parameter (nthetabins=60)
+	parameter (neprimebins=150)
+c	parameter(xbjmin = 0.0)
+c	parameter(xbjmax = 1.5)
+c	parameter(ximin = 0.0)
+c	parameter(ximax = 1.5)
+	parameter(eprimemin = 0.5)
+	parameter(eprimemax = 5.0)
+
+	
+

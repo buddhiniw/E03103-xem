@@ -1,0 +1,23 @@
+	real*8 eprad(400),thrad(91),sigv(91,400),sigrad(91,400),sigdis(91,400),radcor(91,400)
+	real*8 sigrel(91,400),sigrqe(91,400),sigrdis(91,400),coulcor(91,400)
+	real*8 eprad2(400),thrad2,sigv2(400),sigvi2(400),sigvqe2(400)
+        real*8 sigrad2(400),radcor2(400)
+	real*8 sigrel2(400),sigrqe2(400),sigrdis2(400),coulcor2(400)
+	real*8 eprad3(400),thrad3,sigv3(400),sigrad3(400),radcor3(400)
+	real*8 sigrel3(400),sigrqe3(400),sigrdis3(400),coulcor3(400)
+	real*8 eprad4(400),thrad4,sigv4(400),sigrad4(400),radcor4(400)
+	real*8 sigrel4(400),sigrqe4(400),sigrdis4(400),coulcor4(400)
+	logical doing_rad
+	integer kmax,kmax2,kmax3,kmax4 !number of p-bins
+	integer ntheta !number of theta bins
+	common/radcor/eprad,thrad,sigv,sigrad,sigdis,radcor,
+     >               sigrel,sigrqe,sigrdis,coulcor,
+     >               eprad2,thrad2,sigv2,sigvi2,sigvqe2,
+     >               sigrad2,radcor2,
+     >               sigrel2,sigrqe2,sigrdis2,coulcor2,
+     >               eprad3,thrad3,sigv3,sigrad3,radcor3,
+     >               sigrel3,sigrqe3,sigrdis3,coulcor3,
+     >               eprad4,thrad4,sigv4,sigrad4,radcor4,
+     >               sigrel4,sigrqe4,sigrdis4,coulcor4,
+     >               doing_rad,kmax,kmax2,kmax3,kmax4,ntheta
+
