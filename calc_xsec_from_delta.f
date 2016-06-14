@@ -84,7 +84,6 @@ c Loop through the histograms in the simulation file and get the kinematics.
 c hi() is an hbook function which does this.      
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-	print *,"/////////////// in calc_xsec_from_delta"
 
 	do i=1,ndeltabins
 	   ratio(i) = dble(hi(id,i)) 
@@ -109,31 +108,29 @@ c calculate the y scaling variable
 c y is in units of GeV/c
 	   call y_calc(ebeam_cor,eprime(i),thradcent,mtar,mp,aux(2),y_sub,y_calc_ok)
 	   y(i) = y_sub
-	   write(*,*) 'y_sub =  ',y_sub
+c	   write(*,*) 'y_sub =  ',y_sub
 	   
-	   print *,"/////"
 
 c Calculate the radiated cross section from the "main" 2D radcor file
 C keep things consistent - "1" goes with externals, "2" with XEM
 
 	   sigradmodel(i) = sig_rad_func(eprime(i),thradcent)!XEM model, 2d binning
 	   sigexp(i) = ratio(i)*sigradmodel(i) !radiated experimental cross section
-	   write(6,*)'radiated experimental cross section (sigexp rad)',sigexp(i)	   
+c	   write(6,*)'radiated experimental cross section (sigexp rad)',sigexp(i)	   
 
 c Calculate the born experimental cross section. 
 c For this assume the ratio of the radiated cross sections
 c is equal to the ratio of the born cross sections.
 C keep things consistent - "1" goes with externals, "2" with XEM
 	   sigbornmodel(i) = sig_vert_func(eprime(i),thradcent) !XEM model, 2d binning
-	   write(6,*)'Born model cross section (sigborn model)',sigbornmodel(i)	   
+c	   write(6,*)'Born model cross section (sigborn model)',sigbornmodel(i)	   
 
 	   sigbornexp(i)=ratio(i)*sigbornmodel(i)
-	   write(6,*)'Born experimental cross section (sigborn rad)',sigbornexp(i)	   
+c	   write(6,*)'Born experimental cross section (sigborn rad)',sigbornexp(i)	   
 
-CC FIX ME
 c Get the dis cross-section from XEM model
 	   sigdis(i) = sig_dis_func(eprime(i),thradcent)!XEM model, 2d binning
-	   write(*,*) 'dis cross-section from XEM model (sigdis) =  ',sigdis(i)
+c	   write(*,*) 'dis cross-section from XEM model (sigdis) =  ',sigdis(i)
 
 
 
@@ -179,8 +176,8 @@ c sigexp and sigdis are in units of nB/(ster MeV)
 	   sig_n(i) = sig_n_sub
 
 c Get dwdy
-	   write(6,*) "sig_p and sig_n and targ_z, targ_a ",sig_p(i), sig_n(i),targ_Z,targ_a
-	   write(6,*) "q3, mp, y ",q3(i), mp,y(i)
+c	   write(6,*) "sig_p and sig_n and targ_z, targ_a ",sig_p(i), sig_n(i),targ_Z,targ_a
+c	   write(6,*) "q3, mp, y ",q3(i), mp,y(i)
 
 	   dwdy = q3(i)/sqrt(mp**2+q3(i)**2+y(i)**2+2.0*q3(i)*y(i))
 
@@ -196,7 +193,7 @@ c Subtract the dis cross-section from the experimental Born cross-section and di
 c from radcor_xem/sigmodel_calc.f - the sigbornexp(i) is in units of nB/(ster-MeV) or muB/(ster-GeV)
 c So fy gets calculated in units of 1/(TeV/c). 
 	   fy(i) = (sigbornexp(i)-sigdis(i))/fact(i)
-	   write(*,*) 'calculated fy =  ',fy(i)
+c	   write(*,*) 'calculated fy =  ',fy(i)
 
 
 	enddo
@@ -232,7 +229,6 @@ c	2    '             ','[nB/(ster MeV)] ','[nB/(ster MeV)] ',
 
 	close (44)
 
-	print *," /////////////// end calc_xsec_from_delta"
 
 
  7	format(6(a7,2x),13(a10,2x))

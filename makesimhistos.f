@@ -237,32 +237,38 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 	   jacobian = 1.0/r**3
 
 	   weight = normfac*xsec*deltacor*cercor*calcor*jacobian
+	   npass=npass+1
+
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 C       If all cuts are passed, fill histos
+c
+c  HFILL(ID,X,Y,Weight)
+c  Set Y=0 for 1-D histogram
+c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
 	   idbase = 12
-
-
-	      call hfill(3000+idbase,sngl(hsdelta),zero,sngl(weight))
-	      call hfill(3100+idbase,sngl(hsxptar),zero,sngl(weight))
-	      call hfill(3200+idbase,sngl(hsyptar),zero,sngl(weight))
-	      call hfill(3300+idbase,sngl(hsytar),zero,sngl(weight))
-	      call hfill(3400+idbase,sngl(hsxfp),zero,sngl(weight))
-	      call hfill(3500+idbase,sngl(hsxpfp),zero,sngl(weight))
-	      call hfill(3600+idbase,sngl(hsyfp),zero,sngl(weight))
-	      call hfill(3700+idbase,sngl(hsypfp),zero,sngl(weight))
-	      call hfill(3800+idbase,sngl(W),zero,sngl(weight))
-	      call hfill(3900+idbase,sngl(Q2),zero,sngl(weight))
-	      call hfill(4200+idbase,sngl(hstheta-th_rad),zero,sngl(weight))
-	      call hfill(4300+idbase,sngl(eprime),zero,sngl(weight))
-	      call hfill(4400+idbase,sngl(hsdelta),sngl(hstheta-th_rad),sngl(weight))	      
-	      call hfill(4100+idbase,sngl(xi),zero,sngl(weight))
-	      call hfill(4000+idbase,sngl(x_bj),zero,sngl(weight))
-	  
+	   
+	   call hfill(3000+idbase,sngl(hsdelta),zero,sngl(weight))
+	   call hfill(3100+idbase,sngl(hsxptar),zero,sngl(weight))
+	   call hfill(3200+idbase,sngl(hsyptar),zero,sngl(weight))
+	   call hfill(3300+idbase,sngl(hsytar),zero,sngl(weight))
+	   call hfill(3400+idbase,sngl(hsxfp),zero,sngl(weight))
+	   call hfill(3500+idbase,sngl(hsxpfp),zero,sngl(weight))
+	   call hfill(3600+idbase,sngl(hsyfp),zero,sngl(weight))
+	   call hfill(3700+idbase,sngl(hsypfp),zero,sngl(weight))
+	   call hfill(3800+idbase,sngl(W),zero,sngl(weight))
+	   call hfill(3900+idbase,sngl(Q2),zero,sngl(weight))
+	   call hfill(4200+idbase,sngl(hstheta-th_rad),zero,sngl(weight))
+	   call hfill(4300+idbase,sngl(eprime),zero,sngl(weight))
+	   call hfill(4400+idbase,sngl(hsdelta),sngl(hstheta-th_rad),sngl(weight))	      
+	   call hfill(4100+idbase,sngl(xi),zero,sngl(weight))
+	   call hfill(4000+idbase,sngl(x_bj),zero,sngl(weight))
+	   
  666	   continue
 	enddo
-
+	
 	write(33,*) 'Number of MC events in ntuple = ',nevt
 	write(33,*) 'Number of MC events passing cuts= ',npass
 
@@ -556,7 +562,6 @@ C uncorrected data better and give better bin centering corrections
 		    A2 = sigrad(thcount+1,epcount)/coulcor(thcount+1,epcount)
 		    A3 = sigrad(thcount,epcount+1)/coulcor(thcount,epcount+1)
 		    A4 = sigrad(thcount+1,epcount+1)/coulcor(thcount+1,epcount+1)
-	   
 		    A12 = (A1*(thhi-thtmp) + A2*(thtmp-thlo))/delta_th
 		    A34 = (A3*(thhi-thtmp) + A4*(thtmp-thlo))/delta_th
 

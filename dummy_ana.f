@@ -11,6 +11,9 @@ C+______________________________________________________________________________
 ! ARGUMENTS: (All R*4 data type)
 !
 !   RUNNNO   :   Run number
+!   ANGLE    :   Scattering angle
+!   HMS_P    :   Meomentum setting of the HMS
+!
 !   DUMMYFLAG:   dummy target analysis YES/NO
 !   POSIFLAG :   Positron analysis YES/NO
 !
@@ -68,6 +71,11 @@ C-______________________________________________________________________________
 	integer*4 istat,lrecl
 	logical flag,pflag,doing_solid,doing_cryo,doing_posi,doing_dummy_posi
 	logical makedatahistos
+
+
+C       Input data values.
+
+	real*8 testin
 
 
 	parameter(one=1.0)
@@ -284,11 +292,11 @@ c       Open radiative corrections table
 	      endif
 	   enddo  !loop over comment lines
 
-	   read(10,*) kmax  !number of p bins
+	   read(10,*) kmax	!number of p bins
 	   write(33,*) 'number of momentum bins - RAD1',kmax
 
-c	   ntheta = 91
-c	   ntheta = 81
+c       ntheta = 91
+c       ntheta = 81
 	   ntheta = 69          ! I counted and checked this in the radcor file-buddhini
 	   do i = 1,ntheta	!theta bins
 	      do j=1,kmax	!loop over eprime dbins
@@ -300,6 +308,7 @@ c	   ntheta = 81
 		    radcor(i,j) = 1.0E30
 		 endif
 c		 write(6,*) 'radcor read in:',i,j,eprad(j),thrad(i),radcor(i,j),sigrad(i,j),sigdis(i,j),coulcor(i,j)
+
 	      enddo		! loop over eprime
 	   enddo !loop over theta
  99	   continue
@@ -423,18 +432,11 @@ C       Charge weighted average correction
 	   ccurrent = ccurrent/totcharge
 	   cbeampos = cbeampos/totcharge
 	   cdummypos = cdummypos/totcharge
-	   print *, "####"
 	   write(33,*) 'ELECTRONS'
 	   write(33,*) 'Charge weighted average target density correction:',cdens
 	   write(33,*) 'Charge weighted average target boiling correction:',ccurrent
 	   write(33,*) 'Charge weighted average target effective length correction:',cbeampos
 	   write(33,*) 'Charge weighted average correction to dummy from beam pos.:',cdummypos
-	   write(6,*) 'ELECTRONS'
-	   write(6,*) 'Charge weighted average target density correction:',cdens
-	   write(6,*) 'Charge weighted average target boiling correction:',ccurrent
-	   write(6,*) 'Charge weighted average target effective length correction:',cbeampos
-	   write(6,*) 'Charge weighted average correction to dummy from beam pos.:',cdummypos
-	   print *, "###################################" 	
 
 	   cryocor = cdens*ccurrent*cbeampos
 	   
@@ -461,7 +463,7 @@ C       Charge weighted average correction
 		 posicdummypos = posicdummypos + charge_elcl*dummyposcor
 	      enddo
 	      print *, "###################################" 
-	      print *, "Charge weighted average correction.."
+	      print *, "Calculate charge weighted average correction.."
 	      cdens = cdens/posicharge
 	      ccurrent = ccurrent/posicharge
 	      cbeampos = cbeampos/posicharge
@@ -618,11 +620,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c OK - now try to extract some cross sections
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 	print *, "###################################" 
-	write(6,*) 'calculate xsections from delta!'
-	print *, "###################################" 
+	write(6,*) 'calculate xsections from delta binning!'
 	call calc_xsec_from_delta
 	print *, "###################################" 
-	write(6,*) 'calculate xsections from delta!'
+	write(6,*) 'calculate xsections from x binning!'
 	print *, "###################################" 
 	call calc_xsec_from_x
 
