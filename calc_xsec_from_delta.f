@@ -7,6 +7,7 @@ C+______________________________________________________________________________
 !
 !       05-18-2015 buddhini - Coppied from the original file (Aji's file) to clean up the code
 !       a bit.
+!       06-1602916 buddhini - Added errors on Fy
 C-______________________________________________________________________________
 
 	implicit none
@@ -48,7 +49,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Declare variables for the calculation on F(y) (Buddhini)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-	real*8 sig_p(ndeltabins),sig_n(ndeltabins),dwdy,nu(ndeltabins),q3(ndeltabins),fy(ndeltabins),fact(ndeltabins)
+	real*8 sig_p(ndeltabins),sig_n(ndeltabins),dwdy,nu(ndeltabins),q3(ndeltabins)
+	real*8 fy(ndeltabins),efy(ndeltabins),fact(ndeltabins)
 	real*8 sig_p_sub,sig_n_sub,prefac
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -81,7 +83,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Loop through the histograms in the simulation file and get the kinematics. 
-c hi() is an hbook function which does this.      
+c hi(id,j) returns the channel contents in a given histogram bin
+c
+c hie(id,j) Returns the value of the error that has been stored in a given 1-dimensional histogram channel.
+c This corresponds to the square root of the sum of the squares of the weights.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 
@@ -116,6 +121,8 @@ C keep things consistent - "1" goes with externals, "2" with XEM
 
 	   sigradmodel(i) = sig_rad_func(eprime(i),thradcent)!XEM model, 2d binning
 	   sigexp(i) = ratio(i)*sigradmodel(i) !radiated experimental cross section
+	   esig(i) = eratio(i)*sigradmodel(i) ! error on the radiated exp cross section
+
 c	   write(6,*)'radiated experimental cross section (sigexp rad)',sigexp(i)	   
 
 c Calculate the born experimental cross section. 
@@ -140,8 +147,7 @@ c Get the radiative correction
 c Get the coulomb correction
 	   cc(i) = cc_func(eprime(i),thradcent)
 
-c Get the electron/positron ratio
-	   esig(i) = eratio(i)*sigradmodel(i)
+c Calculate the error on the model 
 
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -195,6 +201,9 @@ c So fy gets calculated in units of 1/(TeV/c).
 	   fy(i) = (sigbornexp(i)-sigdis(i))/fact(i)
 c	   write(*,*) 'calculated fy =  ',fy(i)
 
+c Calculate error on fy using esig
+	   efy(i) = esig(i)/fact(i)
+c	   write(*,*) 'calculated efy =  ',efy(i)
 
 	enddo
 
@@ -212,16 +221,16 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 
 	write(44,7) 'Eprime ',' xBj   ','xi     ','W2     ','Q2     ','y     ',
-	1    'fy      ','factor     ','sig_rad   ','sig_dis    ',
+	1    'fy      ','efy         ',  'factor     ','sig_rad   ','sig_dis    ',
 	2    'esig      ', 'sigmodel  ','sigmod_rad ',
 
 c	write(44,7) '(GeV) ','    ','    ','(GeV^2)   ','(GeV^2)    ','(GeV/c)     ',
-c	1    '(TeV^-1)     ','(ster/mB)     ',' [nB/(ster MeV)]  ',' [nB/(ster MeV)]   ',
+c	1    '(TeV^-1)     ','(TeV^-1)     ','(ster/mB)     ',' [nB/(ster MeV)]  ',' [nB/(ster MeV)]   ',
 c	2    '             ','[nB/(ster MeV)] ','[nB/(ster MeV)] ',
 
 	do i=1,nxbins
 	   if(sigexp(i).gt.0.0) then
-	      write(44,8) eprime(i),xbj(i),xi(i),w(i),q2(i),y(i),fy(i),fact(i),sigexp(i),sigdis(i),
+	      write(44,8) eprime(i),xbj(i),xi(i),w(i),q2(i),y(i),fy(i),efy(i), fact(i),sigexp(i),sigdis(i),
 	1	   esig(i),sigbornmodel(i),sigradmodel(i),
 	   endif
 	enddo
