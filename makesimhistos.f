@@ -27,7 +27,7 @@ C-______________________________________________________________________________
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 C Reset the MC histos just in case
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-	do i=1,15
+	do i=1,17
 	   do j=1,3
 	      base = 3000+(i-1)*100
 	      hist=12+(j-1)
@@ -265,7 +265,9 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 	   call hfill(4400+idbase,sngl(hsdelta),sngl(hstheta-th_rad),sngl(weight))	      
 	   call hfill(4100+idbase,sngl(xi),zero,sngl(weight))
 	   call hfill(4000+idbase,sngl(x_bj),zero,sngl(weight))
-	   
+	   call hfill(4500+idbase,sngl(hsytar),sngl(hsdelta),sngl(weight))	      
+	   call hfill(4600+idbase,sngl(hsyptar),sngl(hsxptar),sngl(weight))	      
+
  666	   continue
 	enddo
 	

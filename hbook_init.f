@@ -116,6 +116,14 @@ C Book some Histos for final comparison
          id = 4400+i
          call hbook2(id,'th_vs_delta',ndeltabins,sngl(hdeltacutlo),sngl(hdeltacuthi),
      >        nthetabins,thmin,thmax,zero)
+         id = 4500+i
+         call hbook2(id,'delta_vs_ytar',nchan,ymin,ymax,
+     >        ndeltabins,sngl(hdeltacutlo),sngl(hdeltacuthi),zero)
+         id = 4600+i
+         call hbook2(id,'xptar_vs_yptar',nchan,ypmin,ypmax,
+     >       nchan,xpmin,xpmax,zero)
+             
+
          call hbar2(id)
 C Now do one of these for each run
 cdg         do j=1,11
