@@ -301,11 +301,11 @@ C HMS delta cut
 	  if (abs(hsyptar).ge.hycollcut)goto 888
 
 	  if(ytar.gt.0.5) then
-	     if(hsytar.lt.0.0) goto 888
+	     if(hsytar.lt.0.2) goto 888
 	  endif
 	  
 	  if(ytar.lt.-0.5) then
-	     if(hsytar.gt.0.0) goto 888
+	     if(hsytar.gt.0.2) goto 888
 	  endif
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -360,6 +360,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 	  call hfill(4400+idbase,sngl(hsdelta),sngl(hstheta-th_rad),sngl(ext_weight))
 	  call hfill(4100+idbase,sngl(xi),zero,sngl(ext_weight))
 	  call hfill(4000+idbase,sngl(x_bj),zero,sngl(ext_weight))
+	  call hfill(4500+idbase,sngl(hsytar),sngl(hsdelta),sngl(ext_weight))	      
+	  call hfill(4600+idbase,sngl(hsyptar),sngl(hsxptar),sngl(ext_weight))	      
 
 	  if( (.not.posiflag).and.(hselclean.gt.100.0)) then !fill "elclean" histos
 	     idbase = idbase+1
@@ -378,6 +380,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 	     call hfill(4400+idbase,sngl(hsdelta),sngl(hstheta-th_rad),sngl(ext_weight))
 	     call hfill(4100+idbase,sngl(xi),zero,sngl(ext_weight))
 	     call hfill(4000+idbase,sngl(x_bj),zero,sngl(ext_weight))
+	     call hfill(4500+idbase,sngl(hsytar),sngl(hsdelta),sngl(ext_weight))	      
+	     call hfill(4600+idbase,sngl(hsyptar),sngl(hsxptar),sngl(ext_weight))	      
 
 	  endif
 

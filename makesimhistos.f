@@ -155,11 +155,11 @@ C       HMS delta cut
 	   if (abs(hsyptar).ge.hycollcut)goto 666
 
 	   if(ytar.gt.0.5) then
-	      if(hsytar.lt.0.0) goto 666
+	      if(hsytar.lt.0.2) goto 666
 	   endif
 
 	   if(ytar.lt.-0.5) then
-	      if(hsytar.gt.0.0) goto 666
+	      if(hsytar.gt.0.2) goto 666
 	   endif
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
